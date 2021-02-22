@@ -22,7 +22,7 @@ public class ProviderTest
         Password4jProvider provider4  = new Password4jProvider();
         Security.addProvider(provider4);
 
-        
+
 
     }
 }
