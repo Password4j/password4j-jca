@@ -10,13 +10,13 @@ public class ScryptKeySpec extends AbstractKeySpec
 
     private final int keyLength;
 
-    public ScryptKeySpec(char[] password, byte[] salt, int workFartor, int resources, int parallelization, int keyLenght)
+    public ScryptKeySpec(char[] password, byte[] salt, int workFartor, int resources, int parallelization, int keyLength)
     {
         super(password, salt);
         this.workFactor = workFartor;
         this.resources = resources;
         this.parallelization = parallelization;
-        this.keyLength = keyLenght;
+        this.keyLength = keyLength;
     }
 
     public int getWorkFactor()

@@ -17,11 +17,11 @@ public class ProviderTest
     @Test
     public void test() throws NoSuchAlgorithmException
     {
-        Security.setProperty("crypto.policy", "unlimited");
+        System.out.println(Security.getProperty("crypto.policy"));
         Password4jProvider provider4  = new Password4jProvider();
         Security.addProvider(provider4);
 
-        //SecretKeyFactory sk = SecretKeyFactory.getInstance("scrypt",provider4);
+        SecretKeyFactory sk = SecretKeyFactory.getInstance("scrypt",provider4);
 
         for (Provider provider : Security.getProviders())
         {
@@ -30,8 +30,6 @@ public class ProviderTest
             {
                 System.out.println("   " + service.getType() + " - " + service.getAlgorithm());
             }
-
-
         }
 
     }

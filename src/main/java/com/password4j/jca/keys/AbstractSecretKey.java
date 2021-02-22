@@ -14,7 +14,7 @@ public abstract class AbstractSecretKey<K extends AbstractKeySpec> implements Se
 {
     private static final Charset ENCODING = StandardCharsets.UTF_8;
 
-    private Hash hash;
+    private final Hash hash;
 
     private char[] password;
 
