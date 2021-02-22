@@ -23,7 +23,7 @@ public class Argon2Spi extends AbstractSecretKeyFactorySpi
         {
             Argon2KeySpec spec = (Argon2KeySpec) keySpec;
             Argon2Function argon2 = Argon2Function.getInstance(
-                    spec.getMemory(), spec.getIterations(), spec.getKeyLength(), spec.getParallelization(), spec.getType(), spec.getVersion());
+                    spec.getMemory(), spec.getIterations(), spec.getParallelization(), spec.getKeyLength(), spec.getType(), spec.getVersion());
 
             SecureString password = new SecureString(spec.getPassword());
             Hash hash = Password.hash(password).addSalt(new String(spec.getSalt(), DEFAULT_CHARSET)).with(argon2);

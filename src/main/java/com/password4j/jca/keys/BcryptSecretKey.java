@@ -14,6 +14,6 @@ public class BcryptSecretKey extends AbstractSecretKey<BcryptKeySpec>
     @Override
     public String getAlgorithm()
     {
-        return "scrypt";
+        return "bcrypt";
     }
 }
