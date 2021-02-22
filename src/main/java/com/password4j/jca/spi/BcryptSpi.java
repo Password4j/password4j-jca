@@ -61,12 +61,9 @@ public class BcryptSpi extends AbstractSecretKeyFactorySpi
     @Override
     protected SecretKey engineTranslateKey(SecretKey key) throws InvalidKeyException
     {
-        if (key != null && "bcrypt".equalsIgnoreCase(key.getAlgorithm()) && "RAW".equalsIgnoreCase(key.getFormat()))
+        if (key != null && "bcrypt".equalsIgnoreCase(key.getAlgorithm()) && "RAW".equalsIgnoreCase(key.getFormat()) && key instanceof BcryptSecretKey)
         {
-            if (key instanceof BcryptSecretKey)
-            {
-                return key;
-            }
+            return key;
         }
         throw new InvalidKeyException("Invalid key format/algorithm");
     }

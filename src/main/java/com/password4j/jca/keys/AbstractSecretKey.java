@@ -1,24 +1,19 @@
 package com.password4j.jca.keys;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-
-import javax.crypto.SecretKey;
-
 import com.password4j.Hash;
 import com.password4j.jca.spec.AbstractKeySpec;
+
+import javax.crypto.SecretKey;
+import java.util.Arrays;
 
 
 public abstract class AbstractSecretKey<K extends AbstractKeySpec> implements SecretKey
 {
-    private static final Charset ENCODING = StandardCharsets.UTF_8;
-
-    private final Hash hash;
+    private final transient Hash hash;
 
     private char[] password;
 
-    public AbstractSecretKey(K keySpec, Hash hash)
+    protected AbstractSecretKey(K keySpec, Hash hash)
     {
         this.password = keySpec.getPassword();
         this.hash = hash;
@@ -43,7 +38,7 @@ public abstract class AbstractSecretKey<K extends AbstractKeySpec> implements Se
     @Override
     public byte[] getEncoded()
     {
-        return hash.getResult().getBytes(ENCODING);
+        return hash.getBytes();
     }
 
     public Hash getHash()

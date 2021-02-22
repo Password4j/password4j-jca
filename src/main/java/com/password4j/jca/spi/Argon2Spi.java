@@ -63,12 +63,9 @@ public class Argon2Spi extends AbstractSecretKeyFactorySpi
     @Override
     protected SecretKey engineTranslateKey(SecretKey key) throws InvalidKeyException
     {
-        if (key != null && "argon2".equalsIgnoreCase(key.getAlgorithm()) && "RAW".equalsIgnoreCase(key.getFormat()))
+        if (key != null && "argon2".equalsIgnoreCase(key.getAlgorithm()) && "RAW".equalsIgnoreCase(key.getFormat()) && key instanceof Argon2SecretKey)
         {
-            if (key instanceof Argon2SecretKey)
-            {
-                return key;
-            }
+            return key;
         }
         throw new InvalidKeyException("Invalid key format/algorithm");
     }

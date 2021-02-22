@@ -10,7 +10,7 @@ public abstract class AbstractKeySpec implements KeySpec
 
     private final byte[] salt;
 
-    public AbstractKeySpec(char[] password, byte[] salt)
+    protected AbstractKeySpec(char[] password, byte[] salt)
     {
         this.password = password;
         this.salt = salt;

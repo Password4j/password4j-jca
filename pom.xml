@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.password4j</groupId>
-    <artifactId>providers</artifactId>
+    <artifactId>password4j-jca</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Password4j Providers</name>
+    <name>Password4j JCA</name>
     <description>
         Integrate Password4j with JCA
     </description>
@@ -18,7 +18,7 @@
     <scm>
         <connection>scm:git:git@github.com/Password4j/password4j-${project.artifactId}.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/Password4j/password4j-${project.artifactId}.git</developerConnection>
-        <url>https://github.com/Password4j/password4j-providers</url>
+        <url>https://github.com/Password4j/password4j-jca</url>
         <tag>0.1.0</tag>
     </scm>
 

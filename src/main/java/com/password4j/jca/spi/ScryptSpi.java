@@ -62,12 +62,9 @@ public class ScryptSpi extends AbstractSecretKeyFactorySpi
     @Override
     protected SecretKey engineTranslateKey(SecretKey key) throws InvalidKeyException
     {
-        if (key != null && "scrypt".equalsIgnoreCase(key.getAlgorithm()) && "RAW".equalsIgnoreCase(key.getFormat()))
+        if (key != null && "scrypt".equalsIgnoreCase(key.getAlgorithm()) && "RAW".equalsIgnoreCase(key.getFormat()) && key instanceof ScryptSecretKey)
         {
-            if (key instanceof ScryptSecretKey)
-            {
-                return key;
-            }
+            return key;
         }
         throw new InvalidKeyException("Invalid key format/algorithm");
     }
