@@ -18,6 +18,7 @@ import javax.crypto.SecretKeyFactory;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
@@ -128,5 +129,56 @@ public class ProviderTest
         assertArrayEquals(PASSWORD, ((BcryptSecretKey) key).getPassword());
         assertEquals(spec, ks);
         assertEquals(key, translated);
+    }
+
+    @Test(expected = InvalidKeySpecException.class)
+    public void testBadArgon2Secret() throws NoSuchAlgorithmException, InvalidKeySpecException
+    {
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("argon2");
+
+        BcryptKeySpec spec = new BcryptKeySpec(PASSWORD, SALT, BCrypt.X.minor(), 4);
+        factory.generateSecret(spec);
+    }
+
+    @Test(expected = InvalidKeySpecException.class)
+    public void testBadScryptSecret() throws NoSuchAlgorithmException, InvalidKeySpecException
+    {
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("scrypt");
+
+        Argon2KeySpec spec = new Argon2KeySpec(PASSWORD, SALT, 1,1,1,1, Argon2.D);
+        factory.generateSecret(spec);
+    }
+
+    @Test(expected = InvalidKeySpecException.class)
+    public void testBadBcryptSecret() throws NoSuchAlgorithmException, InvalidKeySpecException
+    {
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("bcrypt");
+
+        ScryptKeySpec spec = new ScryptKeySpec(PASSWORD, SALT, 4, 1, 1, 1);
+        factory.generateSecret(spec);
+    }
+
+    @Test
+    public void testDestroy() throws InvalidKeySpecException, InvalidKeyException, NoSuchAlgorithmException
+    {
+        // GIVEN
+        int memory = 4096;
+        int iterations = 50;
+        int parallelization = 2;
+        int length = 64;
+        Argon2 type = Argon2.D;
+        int version = Argon2Function.ARGON2_VERSION_10;
+
+        // WHEN
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("argon2");
+        Argon2KeySpec spec = new Argon2KeySpec(PASSWORD, SALT, memory, iterations, parallelization, length, type, version);
+        SecretKey key =  factory.generateSecret(spec);
+
+        Argon2SecretKey translated = (Argon2SecretKey) factory.translateKey(key);
+        translated.destroy();
+
+        // THEN
+        assertNull(translated.getPassword());
+
     }
 }
