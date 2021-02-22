@@ -17,7 +17,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.Security;
 import java.security.spec.InvalidKeySpecException;
 
 import static org.junit.Assert.*;
@@ -35,9 +34,7 @@ public class ProviderTest
     @Before
     public void setup()
     {
-        Security.setProperty("crypto.policy", "unlimited");
-        Password4jProvider provider4  = new Password4jProvider();
-        Security.addProvider(provider4);
+        Password4jProvider.enableUnlimited();
     }
 
     @Test
