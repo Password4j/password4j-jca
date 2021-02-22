@@ -17,18 +17,18 @@ public final class Password4jProvider extends Provider
             public Object run()
             {
                 // Argon2
-                put("SecretKeyFactory.argon2", "com.password4j.jca.Argon2Spi");
+                put("SecretKeyFactory.argon2", "com.password4j.jca.spi.Argon2Spi");
                 put("Alg.Alias.SecretKeyFactory.argon2", "argon2");
                 put("SecretKeyFactory.argon2 ImplementedIn", "Software");
 
                 // scrypt
-                put("SecretKeyFactory.scrypt", "com.password4j.jca.ScryptSpi");
+                put("SecretKeyFactory.scrypt", "com.password4j.jca.spi.ScryptSpi");
                 put("Alg.Alias.SecretKeyFactory.scrypt", "scrypt");
                 put("SecretKeyFactory.scrypt ImplementedIn", "Software");
                 
 
                 // bcrypt
-                put("SecretKeyFactory.bcrypt", "com.password4j.jca.BcryptSpi");
+                put("SecretKeyFactory.bcrypt", "com.password4j.jca.spi.BcryptSpi");
                 put("Alg.Alias.SecretKeyFactory.bcrypt", "bcrypt");
                 put("SecretKeyFactory.bcrypt ImplementedIn", "Software");
                 return null;

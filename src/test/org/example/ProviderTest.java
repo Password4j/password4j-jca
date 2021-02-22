@@ -6,6 +6,7 @@ import java.security.Security;
 
 import javax.crypto.SecretKeyFactory;
 
+import com.password4j.jca.spec.ScryptKeySpec;
 import org.junit.Test;
 
 import com.password4j.jca.providers.Password4jProvider;
@@ -21,16 +22,7 @@ public class ProviderTest
         Password4jProvider provider4  = new Password4jProvider();
         Security.addProvider(provider4);
 
-        SecretKeyFactory sk = SecretKeyFactory.getInstance("scrypt",provider4);
-
-        for (Provider provider : Security.getProviders())
-        {
-            System.out.println(provider.toString());
-            for (Provider.Service service : provider.getServices())
-            {
-                System.out.println("   " + service.getType() + " - " + service.getAlgorithm());
-            }
-        }
+        
 
     }
 }
