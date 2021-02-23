@@ -16,13 +16,8 @@ This module extends the JCA (Java Cryptography Library) with **[Argon2](https://
 ```java
 Password4jProvider.enable();
 
-int memory = 4096;
-int iterations = 50;
-int parallelization = 2;
-int length = 64;
-Argon2 type = Argon2.D;
-
 SecretKeyFactory factory = SecretKeyFactory.getInstance("argon2");
+Argon2KeySpec spec = new Argon2KeySpec(password, salt, memory, iterations, parallelization, length, type, version);
 SecretKey key =  factory.generateSecret(spec);
 
 byte[] hash = key.getEncoded();
