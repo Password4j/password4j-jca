@@ -65,31 +65,4 @@ public class Argon2KeySpec extends AbstractKeySpec
         return version;
     }
 
-    @Override
-    public boolean equals(Object o)
-    {
-        if (this == o) return true;
-        if (!(o instanceof Argon2KeySpec)) return false;
-
-        Argon2KeySpec that = (Argon2KeySpec) o;
-
-        if (memory != that.memory) return false;
-        if (iterations != that.iterations) return false;
-        if (parallelization != that.parallelization) return false;
-        if (keyLength != that.keyLength) return false;
-        if (version != that.version) return false;
-        return type == that.type;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        int result = memory;
-        result = 31 * result + iterations;
-        result = 31 * result + parallelization;
-        result = 31 * result + keyLength;
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + version;
-        return result;
-    }
 }

@@ -39,27 +39,4 @@ public class ScryptKeySpec extends AbstractKeySpec
         return keyLength;
     }
 
-    @Override
-    public boolean equals(Object o)
-    {
-        if (this == o) return true;
-        if (!(o instanceof ScryptKeySpec)) return false;
-
-        ScryptKeySpec that = (ScryptKeySpec) o;
-
-        if (workFactor != that.workFactor) return false;
-        if (resources != that.resources) return false;
-        if (parallelization != that.parallelization) return false;
-        return keyLength == that.keyLength;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        int result = workFactor;
-        result = 31 * result + resources;
-        result = 31 * result + parallelization;
-        result = 31 * result + keyLength;
-        return result;
-    }
 }

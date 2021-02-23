@@ -67,7 +67,12 @@ public class ProviderTest
         assertEquals(hash, ((Argon2SecretKey) key).getHash());
         assertArrayEquals(hash.getBytes(), key.getEncoded());
         assertArrayEquals(PASSWORD, ((Argon2SecretKey) key).getPassword());
-        assertEquals(spec, ks);
+        assertTrue(spec.getMemory() == ks.getMemory()
+                && spec.getIterations() == ks.getIterations()
+                && spec.getParallelization() == ks.getParallelization()
+                && spec.getKeyLength() == ks.getKeyLength()
+                && spec.getType() == ks.getType()
+                && spec.getVersion() == ks.getVersion());
         assertEquals(key, translated);
     }
 
@@ -98,7 +103,10 @@ public class ProviderTest
         assertEquals(hash, ((ScryptSecretKey) key).getHash());
         assertArrayEquals(hash.getBytes(), key.getEncoded());
         assertArrayEquals(PASSWORD, ((ScryptSecretKey) key).getPassword());
-        assertEquals(spec, ks);
+        assertTrue(spec.getWorkFactor() == ks.getWorkFactor()
+                && spec.getResources() == ks.getResources()
+                && spec.getParallelization() == ks.getParallelization()
+                && spec.getKeyLength() == ks.getKeyLength());
         assertEquals(key, translated);
     }
 
@@ -127,7 +135,8 @@ public class ProviderTest
         assertEquals(hash, ((BcryptSecretKey) key).getHash());
         assertArrayEquals(hash.getBytes(), key.getEncoded());
         assertArrayEquals(PASSWORD, ((BcryptSecretKey) key).getPassword());
-        assertEquals(spec, ks);
+        assertTrue(spec.getLogRounds() == ks.getLogRounds()
+                && spec.getBcrypt() == ks.getBcrypt());
         assertEquals(key, translated);
     }
 

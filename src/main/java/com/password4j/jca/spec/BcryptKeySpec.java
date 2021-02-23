@@ -37,23 +37,4 @@ public class BcryptKeySpec extends AbstractKeySpec
         return logRounds;
     }
 
-    @Override
-    public boolean equals(Object o)
-    {
-        if (this == o) return true;
-        if (!(o instanceof BcryptKeySpec)) return false;
-
-        BcryptKeySpec that = (BcryptKeySpec) o;
-
-        if (logRounds != that.logRounds) return false;
-        return minor == that.minor;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        int result = minor != null ? minor.hashCode() : 0;
-        result = 31 * result + logRounds;
-        return result;
-    }
 }
