@@ -5,4 +5,4 @@ ADD pom.xml /build/pom.xml
 RUN mvn verify clean --fail-never
 
 COPY . /build
-RUN mvn clean test
+RUN mvn clean package

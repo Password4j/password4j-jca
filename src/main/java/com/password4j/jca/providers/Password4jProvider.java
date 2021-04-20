@@ -8,6 +8,12 @@ import java.security.Provider;
 import java.security.Security;
 
 
+/**
+ *
+ *
+ * @author David Bertoldi
+ * @since 0.1.0
+ */
 public final class Password4jProvider extends Provider
 {
 
@@ -15,8 +21,8 @@ public final class Password4jProvider extends Provider
 
     public static void enable()
     {
-        Password4jProvider provider4  = new Password4jProvider();
-        Security.addProvider(provider4);
+        Password4jProvider instance  = new Password4jProvider();
+        Security.addProvider(instance);
     }
 
     public static void enableUnlimited()
@@ -41,4 +47,6 @@ public final class Password4jProvider extends Provider
         });
 
     }
+
+
 }

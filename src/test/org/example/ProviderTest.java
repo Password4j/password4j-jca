@@ -32,6 +32,28 @@ public class ProviderTest
 
     private static final byte[] SALT = SALT_STRING.getBytes();
 
+    private static class WrongSecretKey implements SecretKey
+    {
+
+        @Override
+        public String getAlgorithm()
+        {
+            return "not-listed";
+        }
+
+        @Override
+        public String getFormat()
+        {
+            return "not-raw";
+        }
+
+        @Override
+        public byte[] getEncoded()
+        {
+            return new byte[0];
+        }
+    }
+
     @Before
     public void setup()
     {
@@ -74,6 +96,57 @@ public class ProviderTest
                 && spec.getType() == ks.getType()
                 && spec.getVersion() == ks.getVersion());
         assertEquals(key, translated);
+    }
+
+    @Test(expected = InvalidKeySpecException.class)
+    public void testArgonKey() throws NoSuchAlgorithmException, InvalidKeySpecException
+    {
+        // GIVEN
+        int workFactor = 1024;
+        int resources = 8;
+        int parallelization = 1;
+        int length = 64;
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("argon2");
+        ScryptSecretKey wrongKey = new ScryptSecretKey(new ScryptKeySpec(PASSWORD, SALT, workFactor, resources, parallelization, length), null);
+
+        // WHEN
+        factory.getKeySpec(wrongKey, Argon2KeySpec.class);
+
+        // THEN
+    }
+
+    @Test(expected = InvalidKeySpecException.class)
+    public void testBcryptKey() throws NoSuchAlgorithmException, InvalidKeySpecException
+    {
+        // GIVEN
+        int workFactor = 1024;
+        int resources = 8;
+        int parallelization = 1;
+        int length = 64;
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("bcrypt");
+        ScryptSecretKey wrongKey = new ScryptSecretKey(new ScryptKeySpec(PASSWORD, SALT, workFactor, resources, parallelization, length), null);
+
+        // WHEN
+        factory.getKeySpec(wrongKey, Argon2KeySpec.class);
+
+        // THEN
+    }
+
+    @Test(expected = InvalidKeySpecException.class)
+    public void testScryptKey() throws NoSuchAlgorithmException, InvalidKeySpecException
+    {
+        // GIVEN
+        int workFactor = 1024;
+        int resources = 8;
+        int parallelization = 1;
+        int length = 64;
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("scrypt");
+        BcryptSecretKey wrongKey = new BcryptSecretKey(new BcryptKeySpec(PASSWORD, SALT, BCrypt.X.minor(), 4), null);
+
+        // WHEN
+        factory.getKeySpec(wrongKey, BcryptKeySpec.class);
+
+        // THEN
     }
 
     @Test
