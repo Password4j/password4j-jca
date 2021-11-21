@@ -1,0 +1,22 @@
+on:
+  # Trigger analysis when pushing in master or pull requests, and when creating
+  # a pull request.
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened]
+name: Main Workflow
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting
+          fetch-depth: 0
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: "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"
+          SONAR_TOKEN: "ADBUbn9MLtJb9oEn/0vIpgnAtQrjJKAKbdB2LuBq60KlwRjNpg/SSjmK3N087cHfKjAYxdHv/LXV93iTCyKN3jmxooVXFVGSgqH3YRtI91YKDQPBR8YxH7i3VhHLQz6ddGOJCG1Ipd894e+uDZDB12BJwM861PnzkQ1JsV2uhGVgeWBRYqQOGJ9VW28VgStd/IQ8b+5FsifYiyTiZM3ogYfpRCvjSSvzDdcSUMEXMV1JmNf7cWdvEDh98Ajr3WgagU6VIfTDt3EnOsQyoMLqg6pvPh0cnJtAI9RR7KvQ/HnWysLqxG7pDOCXQOMxmcenvBfFV35Tizwi9tM/nmALDQy2lhD2JBzoCgih9/LoXH2VjqVyHBPUhrc78/UB89UFn0ShiquteFUTKjrUliO4ytdRJibL+81XYCWbw7OPB1aWASuoOnYMMKsgIL2WHySuTXnqeZJdMsrLTh0jYIJubNJjFO9b5JuarLzaDoiStE4jh09yrfEq8P9VML2+bb2tA331bF8KhCmTRq7eGWwfEto2Q2XW/Z3gogsTSaFj/P6E53LkKGK2ehIBu3kmT5MGPvitAQviemQ/3Zbn2xjEePPSWRGIth+Q9r7d1q/zzCYZN24ZR2tkPNftZc3kqPqKlnBMOAIgMGyHhxXv0N8sxPRdX0UEdW0jJN3mNTjedko="
