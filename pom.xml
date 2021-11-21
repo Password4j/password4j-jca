@@ -44,7 +44,7 @@
         <dependency>
             <groupId>com.password4j</groupId>
             <artifactId>password4j</artifactId>
-            <version>1.5.3</version>
+            <version>1.5.4</version>
         </dependency>
 
         <dependency>

@@ -263,4 +263,160 @@ public class ProviderTest
         assertNull(translated.getPassword());
 
     }
+
+
+
+    private SecretKey sk(String algorithm, String format)
+    {
+        return new SecretKey()
+        {
+            @Override
+            public String getAlgorithm()
+            {
+                return algorithm;
+            }
+
+            @Override
+            public String getFormat()
+            {
+                return format;
+            }
+
+            @Override
+            public byte[] getEncoded()
+            {
+                return new byte[0];
+            }
+        };
+    }
+
+    @Test(expected = InvalidKeyException.class)
+    public void argon2Transalte1() throws NoSuchAlgorithmException, InvalidKeyException
+    {
+        // GIVEN
+
+        // WHEN
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("argon2");
+
+        SecretKey argonKey =  sk("wrong", "RAW");
+        factory.translateKey(argonKey);
+
+        // THEN
+    }
+
+    @Test(expected = InvalidKeyException.class)
+    public void argon2Transalte2() throws NoSuchAlgorithmException, InvalidKeyException
+    {
+        // GIVEN
+
+        // WHEN
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("argon2");
+
+        SecretKey argonKey =  sk("argon2", "EAW");
+        factory.translateKey(argonKey);
+
+        // THEN
+    }
+
+
+
+    @Test(expected = InvalidKeyException.class)
+    public void argon2Transalte3() throws NoSuchAlgorithmException, InvalidKeyException
+    {
+        // GIVEN
+
+        // WHEN
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("argon2");
+
+        factory.translateKey(null);
+
+        // THEN
+    }
+
+    @Test(expected = InvalidKeyException.class)
+    public void bcryptTransalte1() throws NoSuchAlgorithmException, InvalidKeyException
+    {
+        // GIVEN
+
+        // WHEN
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("bcrypt");
+
+        SecretKey argonKey =  sk("wrong", "RAW");
+        factory.translateKey(argonKey);
+
+        // THEN
+    }
+
+    @Test(expected = InvalidKeyException.class)
+    public void bcryptTransalte2() throws NoSuchAlgorithmException, InvalidKeyException
+    {
+        // GIVEN
+
+        // WHEN
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("bcrypt");
+
+        SecretKey argonKey =  sk("bcrypt", "EAW");
+        factory.translateKey(argonKey);
+
+        // THEN
+    }
+
+
+
+    @Test(expected = InvalidKeyException.class)
+    public void bcryptTransalte3() throws NoSuchAlgorithmException, InvalidKeyException
+    {
+        // GIVEN
+
+        // WHEN
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("bcrypt");
+
+        factory.translateKey(null);
+
+        // THEN
+    }
+
+
+    @Test(expected = InvalidKeyException.class)
+    public void scryptTransalte1() throws NoSuchAlgorithmException, InvalidKeyException
+    {
+        // GIVEN
+
+        // WHEN
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("scrypt");
+
+        SecretKey argonKey =  sk("wrong", "RAW");
+        factory.translateKey(argonKey);
+
+        // THEN
+    }
+
+    @Test(expected = InvalidKeyException.class)
+    public void scryptTransalte2() throws NoSuchAlgorithmException, InvalidKeyException
+    {
+        // GIVEN
+
+        // WHEN
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("scrypt");
+
+        SecretKey argonKey =  sk("scrypt", "EAW");
+        factory.translateKey(argonKey);
+
+        // THEN
+    }
+
+
+
+    @Test(expected = InvalidKeyException.class)
+    public void scryptTransalte3() throws NoSuchAlgorithmException, InvalidKeyException
+    {
+        // GIVEN
+
+        // WHEN
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("scrypt");
+
+        factory.translateKey(null);
+
+        // THEN
+    }
 }
