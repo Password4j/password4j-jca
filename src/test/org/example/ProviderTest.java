@@ -419,4 +419,94 @@ public class ProviderTest
 
         // THEN
     }
+
+    @Test(expected = InvalidKeySpecException.class)
+    public void testBcryptKeyNull() throws NoSuchAlgorithmException, InvalidKeySpecException
+    {
+        // GIVEN
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("bcrypt");
+        BcryptSecretKey bcryptSecretKey = new BcryptSecretKey(new BcryptKeySpec(PASSWORD, SALT, BCrypt.X.minor(), 4), null);
+
+        // WHEN
+        factory.getKeySpec(bcryptSecretKey, null);
+
+        // THEN
+    }
+
+
+    @Test(expected = InvalidKeySpecException.class)
+    public void testBcryptKeyNotAssignable() throws NoSuchAlgorithmException, InvalidKeySpecException
+    {
+        // GIVEN
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("bcrypt");
+        BcryptSecretKey bcryptSecretKey = new BcryptSecretKey(new BcryptKeySpec(PASSWORD, SALT, BCrypt.X.minor(), 4), null);
+
+        // WHEN
+        factory.getKeySpec(bcryptSecretKey, ScryptSecretKey.class);
+
+        // THEN
+    }
+
+
+    @Test(expected = InvalidKeySpecException.class)
+    public void testScryptKeyNull() throws NoSuchAlgorithmException, InvalidKeySpecException
+    {
+        // GIVEN
+        int workFactor = 1024;
+        int resources = 8;
+        int parallelization = 1;
+        int length = 64;
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("scrypt");
+        ScryptSecretKey scryptKey = new ScryptSecretKey(new ScryptKeySpec(PASSWORD, SALT, workFactor, resources, parallelization, length), null);
+
+        // WHEN
+        factory.getKeySpec(scryptKey, null);
+
+        // THEN
+    }
+
+
+    @Test(expected = InvalidKeySpecException.class)
+    public void testScryptKeyNotAssignable() throws NoSuchAlgorithmException, InvalidKeySpecException
+    {
+        // GIVEN
+        int workFactor = 1024;
+        int resources = 8;
+        int parallelization = 1;
+        int length = 64;
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("scrypt");
+        ScryptSecretKey scryptKey = new ScryptSecretKey(new ScryptKeySpec(PASSWORD, SALT, workFactor, resources, parallelization, length), null);
+
+        // WHEN
+        factory.getKeySpec(scryptKey, BcryptSecretKey.class);
+
+        // THEN
+    }
+
+    @Test(expected = InvalidKeySpecException.class)
+    public void testArgon2KeyNull() throws NoSuchAlgorithmException, InvalidKeySpecException
+    {
+        // GIVEN
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("argon2");
+        Argon2SecretKey argon2SecretKey = new Argon2SecretKey(new Argon2KeySpec(PASSWORD, SALT, 1, 1, 1, 1, Argon2.ID), null);
+
+        // WHEN
+        factory.getKeySpec(argon2SecretKey, null);
+
+        // THEN
+    }
+
+
+    @Test(expected = InvalidKeySpecException.class)
+    public void testArgon2KeyNotAssignable() throws NoSuchAlgorithmException, InvalidKeySpecException
+    {
+        // GIVEN
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("argon2");
+        Argon2SecretKey argon2SecretKey = new Argon2SecretKey(new Argon2KeySpec(PASSWORD, SALT, 1, 1, 1, 1, Argon2.ID), null);
+
+        // WHEN
+        factory.getKeySpec(argon2SecretKey, BcryptSecretKey.class);
+
+        // THEN
+    }
 }
