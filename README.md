@@ -1,6 +1,6 @@
 ![logo](https://i.imgur.com/m7Zr8cf.png "Password4j JCA")
 
-[![Build Status](https://travis-ci.org/Password4j/password4j-jca.svg?branch=main)](https://travis-ci.org/Password4j/password4j-jca)
+[![Build](https://github.com/Password4j/password4j-jca/actions/workflows/build.yml/badge.svg)](https://github.com/Password4j/password4j-jca/actions/workflows/build.yml)
 [![Maven Central](https://img.shields.io/badge/maven_central-coming_soon-purple)](https://docs.oracle.com/javase/9/)
 [![Java 9 or higher](https://img.shields.io/badge/JDK-9%2B-007396)](https://docs.oracle.com/javase/9/)
 
