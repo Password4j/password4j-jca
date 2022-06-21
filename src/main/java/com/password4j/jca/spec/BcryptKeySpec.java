@@ -1,11 +1,11 @@
 package com.password4j.jca.spec;
 
-import com.password4j.types.BCrypt;
+import com.password4j.types.Bcrypt;
 
 
 public class BcryptKeySpec extends AbstractKeySpec
 {
-    private final BCrypt minor;
+    private final Bcrypt minor;
 
     private final int logRounds;
 
@@ -13,7 +13,7 @@ public class BcryptKeySpec extends AbstractKeySpec
     public BcryptKeySpec(char[] password, byte[] salt, char minor, int logRounds)
     {
         super(password, salt);
-        BCrypt bcrypt =  BCrypt.valueOf(minor);
+        Bcrypt bcrypt =  Bcrypt.valueOf(minor);
         if(bcrypt == null)
         {
             throw new IllegalArgumentException("Invalid bcrypt minor");
@@ -27,7 +27,7 @@ public class BcryptKeySpec extends AbstractKeySpec
         return minor.minor();
     }
 
-    public BCrypt getBcrypt()
+    public Bcrypt getBcrypt()
     {
         return minor;
     }

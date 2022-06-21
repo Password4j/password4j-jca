@@ -3,6 +3,7 @@
 ## Supported Versions
 
 We release patches for security vulnerabilities. Which versions are eligible receiving such patches depend on the [<span>CVSS 3</span>](https://www.first.org/cvss/calculator/3.0) Rating:
+
 | Version | Supported      |
 |---------|----------------|
 | 0.x     | :red_circle:   |

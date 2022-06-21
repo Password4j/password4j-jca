@@ -8,7 +8,7 @@ import javax.crypto.SecretKey;
 
 import com.password4j.Hash;
 import com.password4j.Password;
-import com.password4j.SCryptFunction;
+import com.password4j.ScryptFunction;
 import com.password4j.SecureString;
 import com.password4j.jca.keys.ScryptSecretKey;
 import com.password4j.jca.spec.ScryptKeySpec;
@@ -22,7 +22,7 @@ public class ScryptSpi extends AbstractSecretKeyFactorySpi
         if (keySpec instanceof ScryptKeySpec)
         {
             ScryptKeySpec spec = (ScryptKeySpec) keySpec;
-            SCryptFunction scrypt = SCryptFunction
+            ScryptFunction scrypt = ScryptFunction
                     .getInstance(spec.getWorkFactor(), spec.getResources(), spec.getParallelization(), spec.getKeyLength());
             SecureString password = new SecureString(spec.getPassword());
             Hash hash = Password.hash(password).addSalt(new String(spec.getSalt(), DEFAULT_CHARSET)).with(scrypt);
@@ -42,7 +42,7 @@ public class ScryptSpi extends AbstractSecretKeyFactorySpi
             if ((keySpecCl != null) && ScryptKeySpec.class.isAssignableFrom(keySpecCl))
             {
                 ScryptSecretKey scryptKey = (ScryptSecretKey) key;
-                SCryptFunction function = (SCryptFunction) scryptKey.getHash().getHashingFunction();
+                ScryptFunction function = (ScryptFunction) scryptKey.getHash().getHashingFunction();
 
                 return new ScryptKeySpec(scryptKey.getPassword(), scryptKey.getHash().getSalt().getBytes(),
                         function.getWorkFactor(), function.getResources(), function.getParallelization(),

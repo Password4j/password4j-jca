@@ -9,7 +9,7 @@ import com.password4j.jca.spec.Argon2KeySpec;
 import com.password4j.jca.spec.BcryptKeySpec;
 import com.password4j.jca.spec.ScryptKeySpec;
 import com.password4j.types.Argon2;
-import com.password4j.types.BCrypt;
+import com.password4j.types.Bcrypt;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -141,7 +141,7 @@ public class ProviderTest
         int parallelization = 1;
         int length = 64;
         SecretKeyFactory factory = SecretKeyFactory.getInstance("scrypt");
-        BcryptSecretKey wrongKey = new BcryptSecretKey(new BcryptKeySpec(PASSWORD, SALT, BCrypt.X.minor(), 4), null);
+        BcryptSecretKey wrongKey = new BcryptSecretKey(new BcryptKeySpec(PASSWORD, SALT, Bcrypt.X.minor(), 4), null);
 
         // WHEN
         factory.getKeySpec(wrongKey, BcryptKeySpec.class);
@@ -163,7 +163,7 @@ public class ProviderTest
         ScryptKeySpec spec = new ScryptKeySpec(PASSWORD, SALT, workFactor, resources, parallelization, length);
         SecretKey key =  factory.generateSecret(spec);
 
-        SCryptFunction scryptFunction = SCryptFunction.getInstance(workFactor, resources, parallelization, length);
+        ScryptFunction scryptFunction = ScryptFunction.getInstance(workFactor, resources, parallelization, length);
         Hash hash = Password.hash(new SecureString(PASSWORD)).addSalt(SALT_STRING).with(scryptFunction);
 
         ScryptKeySpec ks = (ScryptKeySpec) factory.getKeySpec(key, ScryptKeySpec.class);
@@ -188,14 +188,14 @@ public class ProviderTest
     {
         // GIVEN
         int rounds = 10;
-        BCrypt version = BCrypt.A;
+        Bcrypt version = Bcrypt.A;
 
         // WHEN
         SecretKeyFactory factory = SecretKeyFactory.getInstance("bcrypt");
         BcryptKeySpec spec = new BcryptKeySpec(PASSWORD, SALT, version.minor(), rounds);
         SecretKey key =  factory.generateSecret(spec);
 
-        BCryptFunction bcryptFunction = BCryptFunction.getInstance(version, rounds);
+        BcryptFunction bcryptFunction = BcryptFunction.getInstance(version, rounds);
         Hash hash = Password.hash(new SecureString(PASSWORD)).addSalt(SALT_STRING).with(bcryptFunction);
 
         BcryptKeySpec ks = (BcryptKeySpec) factory.getKeySpec(key, BcryptKeySpec.class);
@@ -218,7 +218,7 @@ public class ProviderTest
     {
         SecretKeyFactory factory = SecretKeyFactory.getInstance("argon2");
 
-        BcryptKeySpec spec = new BcryptKeySpec(PASSWORD, SALT, BCrypt.X.minor(), 4);
+        BcryptKeySpec spec = new BcryptKeySpec(PASSWORD, SALT, Bcrypt.X.minor(), 4);
         factory.generateSecret(spec);
     }
 
@@ -425,7 +425,7 @@ public class ProviderTest
     {
         // GIVEN
         SecretKeyFactory factory = SecretKeyFactory.getInstance("bcrypt");
-        BcryptSecretKey bcryptSecretKey = new BcryptSecretKey(new BcryptKeySpec(PASSWORD, SALT, BCrypt.X.minor(), 4), null);
+        BcryptSecretKey bcryptSecretKey = new BcryptSecretKey(new BcryptKeySpec(PASSWORD, SALT, Bcrypt.X.minor(), 4), null);
 
         // WHEN
         factory.getKeySpec(bcryptSecretKey, null);
@@ -439,7 +439,7 @@ public class ProviderTest
     {
         // GIVEN
         SecretKeyFactory factory = SecretKeyFactory.getInstance("bcrypt");
-        BcryptSecretKey bcryptSecretKey = new BcryptSecretKey(new BcryptKeySpec(PASSWORD, SALT, BCrypt.X.minor(), 4), null);
+        BcryptSecretKey bcryptSecretKey = new BcryptSecretKey(new BcryptKeySpec(PASSWORD, SALT, Bcrypt.X.minor(), 4), null);
 
         // WHEN
         factory.getKeySpec(bcryptSecretKey, ScryptSecretKey.class);

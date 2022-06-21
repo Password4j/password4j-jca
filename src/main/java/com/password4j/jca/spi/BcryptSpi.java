@@ -6,7 +6,8 @@ import java.security.spec.KeySpec;
 
 import javax.crypto.SecretKey;
 
-import com.password4j.BCryptFunction;
+import com.password4j.BcryptFunction;
+import com.password4j.BcryptFunction;
 import com.password4j.Hash;
 import com.password4j.Password;
 import com.password4j.SecureString;
@@ -22,7 +23,7 @@ public class BcryptSpi extends AbstractSecretKeyFactorySpi
         if (keySpec instanceof BcryptKeySpec)
         {
             BcryptKeySpec spec = (BcryptKeySpec) keySpec;
-            BCryptFunction bcrypt = BCryptFunction
+            BcryptFunction bcrypt = BcryptFunction
                     .getInstance(spec.getBcrypt(), spec.getLogRounds());
             SecureString password = new SecureString(spec.getPassword());
             Hash hash = Password.hash(password).addSalt(new String(spec.getSalt(), DEFAULT_CHARSET)).with(bcrypt);
@@ -42,7 +43,7 @@ public class BcryptSpi extends AbstractSecretKeyFactorySpi
             if ((keySpecCl != null) && BcryptKeySpec.class.isAssignableFrom(keySpecCl))
             {
                 BcryptSecretKey bcryptKey = (BcryptSecretKey) key;
-                BCryptFunction function = (BCryptFunction) bcryptKey.getHash().getHashingFunction();
+                BcryptFunction function = (BcryptFunction) bcryptKey.getHash().getHashingFunction();
 
                 return new BcryptKeySpec(bcryptKey.getPassword(), bcryptKey.getHash().getSalt().getBytes(),
                         function.getType().minor(), function.getLogarithmicRounds());
