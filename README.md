@@ -3,6 +3,7 @@
 [![Build](https://github.com/Password4j/password4j-jca/actions/workflows/build.yml/badge.svg)](https://github.com/Password4j/password4j-jca/actions/workflows/build.yml)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.password4j/password4j-jca/badge.svg?color=purple)](https://maven-badges.herokuapp.com/maven-central/com.password4j/password4j-jca)
 [![Java 9 or higher](https://img.shields.io/badge/JDK-9%2B-007396)](https://docs.oracle.com/javase/9/)
+[![Password4j 1.6.0](https://img.shields.io/badge/passwor4j-1.6.0-blue)](https://github.com/Password4j/password4j)
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Password4j_password4j-jca&metric=alert_status)](https://sonarcloud.io/dashboard?id=Password4j_password4j-jca)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Password4j_password4j-jca&metric=security_rating)](https://sonarcloud.io/dashboard?id=Password4j_password4j-jca)
