@@ -34,21 +34,10 @@ Add the dependency of the latest version to your `pom.xml`:
 <dependency>
     <groupId>com.password4j</groupId>
     <artifactId>password4j-jca</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 
-## ![Gradle](https://i.imgur.com/qtc6bXq.png?1) Gradle
-Add to your `build.gradle` module dependencies:
-```groovy
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    implementation 'com.password4j:password4j-jca:1.0.2'
-}
-```
 
 # Contributing
 ![GitHub issues](https://img.shields.io/github/issues/Password4j/password4j-jca?color=success)

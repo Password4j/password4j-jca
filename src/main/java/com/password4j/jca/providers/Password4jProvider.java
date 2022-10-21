@@ -1,7 +1,5 @@
 package com.password4j.jca.providers;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.security.Provider;
@@ -39,7 +37,7 @@ public final class Password4jProvider extends Provider
         AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
             for(String alg : SUPPORTED_ALGS)
             {
-                put("SecretKeyFactory." + alg, "com.password4j.jca.spi." + StringUtils.capitalize(alg) + "Spi");
+                put("SecretKeyFactory." + alg, "com.password4j.jca.spi." + (alg.substring(0, 1).toUpperCase() + alg.substring(1)) + "Spi");
                 put("Alg.Alias.SecretKeyFactory." + alg, alg);
                 put("SecretKeyFactory." + alg + " ImplementedIn", "Software");
             }
@@ -47,6 +45,7 @@ public final class Password4jProvider extends Provider
         });
 
     }
+
 
 
 }
