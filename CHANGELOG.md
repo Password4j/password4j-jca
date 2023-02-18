@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.3](https://github.com/Password4j/password4j-jca/releases/tag/1.0.5) - (2022-10-21)
+### Change
+* Compatibility with Password4j 1.7.0
+
 ## [1.0.3](https://github.com/Password4j/password4j-jca/releases/tag/1.0.3) - (2022-10-21)
 ### Change
 * Compatibility with Password4j 1.6.3
